@@ -3,34 +3,64 @@ from .models import Recipe
 
 # Create your tests here.
 class RecipeModelTest(TestCase):
-
+    # set up non-modified objects used by all test methods
     def setUpTestData():
-        Recipe.objects.create(name='Salad', ingredients='Lettuce, Cheese, Tomato', cooking_time='5', difficulty='Easy')
+        Recipe.objects.create(
+            name = "Salad",
+            ingredients = "Lettuce, Shredded Cheese, Tomato",
+            cooking_time = 5,
+        )
 
+    # NAME
     def test_recipe_name(self):
+        # get a recipe object to test
         recipe = Recipe.objects.get(recipe_id=1)
 
-        field_label = recipe._meta.get_field('name').verbose_name
+        # get metadata for 'name' field and use it to query its data
+        field_label = recipe._meta.get_field("name").verbose_name
 
-        self.assertEqual(field_label, 'name')
+        # compare the value to the expected result
+        self.assertEqual(field_label, "name")
 
+    def test_recipe_name_max_length(self):
+        # get a recipe object to test
+        recipe = Recipe.objects.get(recipe_id=1)
+
+        # get metadata for 'name' field and use it to query its data
+        max_length = recipe._meta.get_field("name").max_length
+
+        # compare the value to the expected result
+        self.assertEqual(max_length, 50)
+
+    # INGREDIENTS
     def test_ingredients_max_length(self):
+        # get a recipe object to test
         recipe = Recipe.objects.get(recipe_id=1)
 
-        max_length = recipe._meta.get_field('ingredients').max_length
+        # get metadata for 'ingredients' field and use it to query its data
+        max_length = recipe._meta.get_field("ingredients").max_length
 
-        self.assertEqual(max_length, 120)
+        # compare the value to the expected result
+        self.assertEqual(max_length, 225)
 
-    def test_cooking_time(self):
+    # COOKING TIME
+    def test_cooking_time_value(self):
+        # get a recipe object to test
         recipe = Recipe.objects.get(recipe_id=1)
 
-        field_label = recipe._meta.get_field('cooking_time').verbose_name
+        # get metadata for 'cooking_time' field and use it to query its data
+        cooking_time_value = recipe.cooking_time
 
-        self.assertEqual(field_label, 'cooking time')
-        
-    def test_difficulty(self):
+        # compare the value to the expected result
+        self.assertIsInstance(cooking_time_value, int)
+
+    # DIFFICULTY
+    def test_difficulty_calculation(self):
+        # Get a recipe object to test
         recipe = Recipe.objects.get(recipe_id=1)
 
-        field_label = recipe._meta.get_field('difficulty').verbose_name
+        # Call the method to calculate difficulty 
+        calculated_difficulty = recipe.calculate_difficulty()
 
-        self.assertEqual(field_label, 'difficulty')
+        # Assert the result
+        self.assertEqual(calculated_difficulty, 'Easy')
