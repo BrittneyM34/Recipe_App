@@ -1,11 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+    {% load static %}
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recipes Home Page</title>
 </head>
-<body style="text-align: center; font-size: 50px; font-family:'Times New Roman', Times, serif;">
-    Welcome to your Recipes
+
+<body>
+    <h1 style="text-align: center; font-size: 50px; font-family:'Times New Roman', Times, serif;">
+        Welcome to your Recipes
+    </h1>
+
+    <img src="{% static 'recipes/images/welcomepage.jpg' %}" alt="recipes_home" width="1875" height="800">
 </body>
+
 </html>

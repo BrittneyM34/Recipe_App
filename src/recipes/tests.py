@@ -64,3 +64,7 @@ class RecipeModelTest(TestCase):
 
         # Assert the result
         self.assertEqual(calculated_difficulty, 'Easy')
+
+    def test_get_absolute_url(self):
+        recipe = Recipe.objects.get(recipe_id=1)
+        self.assertEqual(recipe.get_absolute_url(), '/list/1')
