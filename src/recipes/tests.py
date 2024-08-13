@@ -1,5 +1,7 @@
 from django.test import TestCase
 from .models import Recipe
+from .forms import RecipeSearchForm
+from django.contrib.auth.models import User
 
 # Create your tests here.
 class RecipeModelTest(TestCase):
@@ -68,3 +70,44 @@ class RecipeModelTest(TestCase):
     def test_get_absolute_url(self):
         recipe = Recipe.objects.get(recipe_id=1)
         self.assertEqual(recipe.get_absolute_url(), '/list/1')
+
+class RecipeFormTest(TestCase):
+
+    def test_form_validity(self):
+        # form with all fields filled
+        form_data = {
+            'search_term': 'Salad',
+            'ingredients': 'Lettuce, Tomato, Cheese',
+            'chart_type': '#1',
+        }
+        form = RecipeSearchForm(data=form_data)
+        self.assertTrue(form.is_valid())
+
+    def test_cooking_time_validation(self):
+        form_data_invalid = {
+            'cooking_time': -2
+        }
+        form_invalid = RecipeSearchForm(data=form_data_invalid)
+        self.assertFalse(form_invalid.is_valid())
+
+
+class RecipeViewTest(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        cls.user = User.objects.create_user(username='testuser', password='12345')
+        # Set up data for the view tests.
+        cls.recipe = Recipe.objects.create(
+            name='View Test Recipe',
+            ingredients='Ingredient1,Ingredient2,Ingredient3',
+            cooking_time=20,
+            difficulty='Medium',
+        )
+
+        # For the test_login_required_for_list_view
+    def test_login_required_for_list_view(self):
+        response = self.client.get('/list/')
+        self.assertRedirects(response, '/login/?next=/list/')
+
+    # For the test_login_required_for_detail_view
+    def test_login_required_for_detail_view(self):
+        response = self.client.get(f'list/{self.recipe.pk}/')

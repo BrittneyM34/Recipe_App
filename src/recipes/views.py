@@ -3,6 +3,10 @@ from django.views.generic import ListView, DetailView
 from .models import Recipe
 # to protect class-based view
 from django.contrib.auth.mixins import LoginRequiredMixin
+from .forms import RecipeSearchForm
+import pandas as pd
+from .utils import get_recipename_from_id, get_chart
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def home(request):
@@ -15,3 +19,30 @@ class RecipeListView(LoginRequiredMixin, ListView):
 class RecipeDetailView(LoginRequiredMixin, DetailView):
     model = Recipe
     template_name = 'recipes/detail.html'
+
+@login_required
+def search_view(request):
+    form = RecipeSearchForm(request.POST or None)
+    recipe_df = None
+    chart = None
+
+    # check if button is clicked
+    if request.method =='POST':
+        # search_term = request.POST.get('search_term')
+        chart_type = request.POST.get('chart_type')
+        
+        # apply filter to extract data
+        qs = Recipe.objects.all()
+        if qs:
+            recipe_df=pd.DataFrame(qs.values())
+            chart=get_chart(chart_type, recipe_df, labels=recipe_df['name'].values)
+            recipe_df=recipe_df.to_html()
+        
+    context={
+        'form': form,
+        'recipe_df': recipe_df,
+        'chart': chart,
+    }
+
+    # load the search page
+    return render(request, 'recipes/search.html', context)
