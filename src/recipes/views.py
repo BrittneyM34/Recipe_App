@@ -35,8 +35,9 @@ def search_view(request):
         qs = Recipe.objects.all()
         if qs:
             recipe_df=pd.DataFrame(qs.values())
+            # recipe_df['Link'] = recipe_df.apply(lambda row: f'<a href="./detail.html?{row["recipe_id"]}" target="_blank">{row["name"]}</a>', axis=1)
             chart=get_chart(chart_type, recipe_df, labels=recipe_df['name'].values)
-            recipe_df=recipe_df.to_html()
+            recipe_df=recipe_df.to_html(escape=False)
         
     context={
         'form': form,

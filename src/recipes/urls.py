@@ -9,6 +9,6 @@ app_name = 'recipes'
 urlpatterns = [
     path('', home, name='home'),
     path('list/', RecipeListView.as_view(), name='list'),
-    path('recipe/<int:pk>/', RecipeDetailView.as_view(), name='detail'),
+    path('list/<pk>', RecipeDetailView.as_view(), name='detail'),
     path('search/', search_view, name='search'),
 ]

@@ -23,6 +23,9 @@
     {% if recipe_df %}
     {{recipe_df|safe}}
     <br>
+    <a href="{{object.get_absolute_url}}">
+        {{object.name}}
+    </a>
     <img src="data:image/png;base64, {{chart|safe}}">
     {% else %}
     <h3>No data</h3>
