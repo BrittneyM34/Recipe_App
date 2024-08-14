@@ -5,31 +5,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'recipes/css/search.css' %}?v={{ STATIC_VERSION }}">
     <title>Search</title>
 </head>
 
 <body>
-    <div>
-        <a href="{%url 'logout' %}"> Logout </a>
-    </div>
+    <nav>
+    <ul class="navigation">
+        <li class="logout"><a href="{%url 'logout' %}">Logout</a></li>
+    </ul>
+    </nav>
     <h1>Search for recipes</h1>
     <hr>
-    <form action="" method="POST">
-        {%csrf_token %}
-        {{form}}
-        <button type="submit">Search</button>
-    </form>
-    <br>
-    {% if recipe_df %}
-    {{recipe_df|safe}}
-    <br>
-    <a href="{{object.get_absolute_url}}">
-        {{object.name}}
-    </a>
-    <img src="data:image/png;base64, {{chart|safe}}">
-    {% else %}
-    <h3>No data</h3>
-    {% endif %}
+    <div class="container">
+        <form action="" method="POST">
+            {%csrf_token %}
+            {{form}}
+            <button type="submit">Search</button>
+        </form>
+        <br>
+        <div class="table">
+            {% if recipe_df %}
+            {{recipe_df|safe}}
+            <br>
+            <a href="{{object.get_absolute_url}}">
+                {{object.name}}
+            </a>
+            <img src="data:image/png;base64, {{chart|safe}}">
+            {% else %}
+            <h3>No data</h3>
+            {% endif %}
+        </div>
+    </div>
 </body>
 
 </html>

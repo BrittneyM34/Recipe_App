@@ -4,7 +4,10 @@ body {
 }
 
 h1{
-    text-align: center;
+    text-align: center; 
+    font-size: 50px; 
+    font-family:'Times New Roman', Times, serif;
+    color: #807ED9;
 }
 
 .recipe-name {
@@ -25,7 +28,7 @@ table {
     width: 60%;
     margin: 20px auto;
     border-collapse: collapse;
-    background-color:#64c9e5;
+    background-color:#807ED9;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
@@ -44,4 +47,23 @@ table img {
     display: block;
     margin: 10px auto;
     border-radius: 10px;
+}
+
+.navigation {
+    background-color: #807ED9; 
+    list-style: none; 
+    display: flex; 
+    padding-top: 20px; 
+    padding-bottom: 20px; 
+    font-size: larger;
+    margin: fixed;
+}
+
+nav ul li a {
+    margin-right: 20px; 
+    color: white;
+}
+
+tr {
+    border: 2px solid black;
 }

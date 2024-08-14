@@ -5,13 +5,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="{% static 'recipes/css/list.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'recipes/css/list.css' %}?v={{ STATIC_VERSION }}">
     <title>Recipe List</title>
 </head>
 
 <body>
+    <div class="container">
     <h1>Recipes List</h1>
-    <a style="text-align: center" href = "{%url 'logout' %}">Logout</a>
+    <nav>
+        <ul class="navigation">
+            <li><a href="{%url 'logout' %}">Logout</a></li>
+        </ul>
+    </nav>
     <table border="1" cellpadding="5" cellspacing="5">
         <tr>
             <td style="font-size: 30px;"> Recipe Title</td>
@@ -27,6 +32,7 @@
         </tr>
         {% endfor %}
     </table>
+    </div>
 </body>
 
 </html>

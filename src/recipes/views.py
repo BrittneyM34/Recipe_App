@@ -32,7 +32,7 @@ def search_view(request):
         chart_type = request.POST.get('chart_type')
         
         # apply filter to extract data
-        qs = Recipe.objects.all()
+        qs = Recipe.objects.filter()
         if qs:
             recipe_df=pd.DataFrame(qs.values())
             # recipe_df['Link'] = recipe_df.apply(lambda row: f'<a href="./detail.html?{row["recipe_id"]}" target="_blank">{row["name"]}</a>', axis=1)

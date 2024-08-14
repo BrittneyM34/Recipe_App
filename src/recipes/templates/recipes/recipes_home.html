@@ -1,20 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-    {% load static %}
+{% load static %}
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'recipes/css/recipes_home.css' %}?v={{ STATIC_VERSION }}">
+    <script src="{% static 'recipes/js/home.js' %}"></script>
     <title>Recipes Home Page</title>
 </head>
 
+
 <body>
-    <h1 style="text-align: center; font-size: 50px; font-family:'Times New Roman', Times, serif;">
+    <h1>
         Welcome to your Recipes
     </h1>
-    <a href = "{%url 'login' %}">Login</a>
+    <nav>
+        <ul class="navigation">
+            <li><a href="{%url 'login' %}">Login</a></li>
+        </ul>
+    </nav>
 
-    <img src="{% static 'recipes/images/welcomepage.jpg' %}" alt="recipes_home" width="1875" height="800">
+    <div class="welcome-pic">
+        <img src="{% static 'recipes/images/welcomepage.jpg' %}" alt="recipes_home" width="1500" height="600">
+    </div>
 </body>
 
 </html>

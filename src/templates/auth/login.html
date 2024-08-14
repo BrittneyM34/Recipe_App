@@ -1,23 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <style>
+        .container {
+            padding: 100px;
+            background-color: #807ED9;
+            text-align: center;
+            width: 40%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+    </style>
 </head>
+
 <body>
-    <h1>Login</h1>
+    <div class="container">
+        <div class="containerText">
+            <h1>Login</h1>
 
-    {% if error_message %}
-        {{error_message}}
-    {% endif %}
+            {% if error_message %}
+            {{error_message}}
+            {% endif %}
 
-    <form action="" method="POST">
-        {% csrf_token %}
+            <form action="" method="POST">
+                {% csrf_token %}
 
-        {{form}}
+                {{form}}
 
-        <button type="submit">Login</button>
-    </form>
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </div>
 </body>
+
 </html>

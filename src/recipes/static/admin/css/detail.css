@@ -1,0 +1,15 @@
+body {
+    text-align: center;
+    width: 60%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.container {
+    background-color: #64c9e5;
+}
+
+body img {
+    padding: 10px;
+}
