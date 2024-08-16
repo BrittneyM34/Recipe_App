@@ -38,7 +38,6 @@ ALLOWED_HOSTS = [
     'powerful-bastion-56322-4c9b7c7f14ea.herokuapp.com'
 ]
 
-
 # Application definition
 
 INSTALLED_APPS = [
