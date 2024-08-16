@@ -35,6 +35,7 @@ ALLOWED_HOSTS = [
     "desolate-everglades-36144-e369b6e7c0c9.herokuapp.com",
     "localhost",
     "127.0.0.1",
+    'https://powerful-bastion-56322-4c9b7c7f14ea.herokuapp.com/'
 ]
 
 
