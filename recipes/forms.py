@@ -14,5 +14,6 @@ class RecipeSearchForm(forms.Form):
     chart_type = forms.ChoiceField(choices=CHART_CHOICES)
 
 class RecipeForm(forms.ModelForm):
-    model = Recipe
-    fields = ['name', 'cooking_time', 'ingredients', 'pic']
+    class Meta:
+        model = Recipe
+        fields = ['name', 'cooking_time', 'ingredients', 'pic']

@@ -50,7 +50,7 @@ def search_view(request):
 @login_required
 def add_recipe(request):
     if request.method == 'POST':
-        form = RecipeForm(request.POST, request.FILES)
+        form = RecipeForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect('recipes:recipe_list')  # Redirect to the recipe list after saving
