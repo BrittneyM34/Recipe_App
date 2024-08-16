@@ -1,9 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView
 from .models import Recipe
 # to protect class-based view
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .forms import RecipeSearchForm
+from .forms import RecipeSearchForm, RecipeForm
 import pandas as pd
 from .utils import get_recipename_from_id, get_chart
 from django.contrib.auth.decorators import login_required
@@ -44,6 +44,16 @@ def search_view(request):
         'recipe_df': recipe_df,
         'chart': chart,
     }
-
-    # load the search page
+        # load the search page
     return render(request, 'recipes/search.html', context)
+
+@login_required
+def add_recipe(request):
+    if request.method == 'POST':
+        form = RecipeForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('recipes:recipe_list')  # Redirect to the recipe list after saving
+    else:
+        form = RecipeForm()
+    return render(request, 'add_recipe.html', {'form': form})
